@@ -46,12 +46,12 @@ export const Search = ({ onSearch, onChange, hintList }: Props) => {
   };
 
   return (
-    <form role="search" onSubmit={search}>
-      <label htmlFor="cb1-input">State</label>
-      <div>
+    <form role="search" onSubmit={search} className="w-full relative">
+      <div className="border border-gray-700 rounded-md px-4 pt-2 pb-1">
         <input
           id="cb1-input"
           type="text"
+          placeholder="Wpisz nazwę gracza..."
           role="combobox"
           autoComplete="off"
           aria-autocomplete="both"
@@ -61,23 +61,30 @@ export const Search = ({ onSearch, onChange, hintList }: Props) => {
           onChange={updateSearchValue}
           onFocus={openHints}
           onBlur={hiddenHints}
+          className="focus-visible:outline-none w-full pb-1 border-b-4 border-b-transparent focus-visible:border-b-cyan-600 transition-colors"
         />
-        {!!hintList && !isHiddenHints && (
-          <ul id="cb1-listbox" role="listbox" aria-label="States">
-            {hintList.map((value) => (
-              <li
-                key={value}
-                id="lb1-al"
-                role="option"
-                aria-selected={false}
-                onClick={searchSelectedHint(value)}
-              >
-                {value}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
+      {!!hintList?.length && !isHiddenHints && (
+        <ul
+          id="cb1-listbox"
+          role="listbox"
+          aria-label="States"
+          className="pt-1 pb-2 absolute bg-white px-4 w-full rounded-b-md border-gray-700 border border-t-0 -translate-y-1"
+        >
+          {hintList.map((value) => (
+            <li
+              key={value}
+              id="lb1-al"
+              role="option"
+              aria-selected={false}
+              onClick={searchSelectedHint(value)}
+              className="cursor-pointer"
+            >
+              {value}
+            </li>
+          ))}
+        </ul>
+      )}
     </form>
   );
 };

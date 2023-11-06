@@ -41,6 +41,9 @@ export const Default: Story = {
       onChange && onChange(searchValue);
 
       if (searchValue.length < 3) {
+        setHintList((currentList) => {
+          return !currentList.length ? currentList : [];
+        });
         return;
       }
 
@@ -54,7 +57,25 @@ export const Default: Story = {
     };
 
     return (
-      <SearchComponent {...restProps} hintList={hintList} onChange={getHints} />
+      <>
+        <SearchComponent
+          {...restProps}
+          hintList={hintList}
+          onChange={getHints}
+        />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer leo
+          ante, eleifend eu malesuada a, ultricies a tellus. Orci varius natoque
+          penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          Duis quis enim nunc. Duis varius purus leo, vel semper enim
+          ullamcorper pretium. Vestibulum elit turpis, bibendum ut risus ut,
+          pellentesque volutpat orci. Nam in eleifend orci, non suscipit nisl.
+          Praesent placerat tincidunt ipsum, in sagittis dolor malesuada ac.
+          Mauris vitae urna eu justo porttitor posuere ac sed diam. Mauris urna
+          dui, sagittis ac mattis ac, molestie condimentum nisl. Ut rutrum odio
+          id risus lacinia pharetra.
+        </p>
+      </>
     );
   },
 };
