@@ -19,7 +19,7 @@ const mockHintList = [
   "American Samoa",
   "Arizona",
   "Arkansas",
-  "California",
+  "Conlifornia",
   "Conlorado",
   "Connecticut",
   "Delaware",
@@ -87,7 +87,7 @@ export const ShowHints: Story = {
 
     const searchInput = canvas.getByRole("combobox");
 
-    await userEvent.type(searchInput, "Cal");
+    await userEvent.type(searchInput, "Con");
 
     const hintsList = canvas.getByRole("listbox");
 
@@ -102,10 +102,10 @@ export const ShowHintsOnlyAfter3char: Story = {
 
     const searchInput = canvas.getByRole("combobox");
 
-    await userEvent.type(searchInput, "Cal");
+    await userEvent.type(searchInput, "Ca");
 
-    const hintsList = canvas.getByRole("listbox");
+    const hintsList = canvas.queryAllByRole("listbox");
 
-    await expect(hintsList).toBeNull();
+    expect(hintsList).toHaveLength(0);
   },
 };
