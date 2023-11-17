@@ -1,8 +1,9 @@
+import MainCharacter from "@/components/MainCharacter";
 import { Character } from "@/lib/charactersFinder/contracts";
 import prepareUrl from "@/lib/charactersFinder/prepareUrl";
 import RoutingPageProps from "@/types/RoutingPageProps";
 
-const ONE_MINUTE = 1000;
+const ONE_MINUTE = 60 * 1000;
 
 export default async function Search({ searchParams }: RoutingPageProps) {
   const response = await fetch(
@@ -17,22 +18,14 @@ export default async function Search({ searchParams }: RoutingPageProps) {
   const characterInfo: Character = await response.json();
 
   return (
-    <div>
-      <div>
-        <b>Name:</b> {characterInfo.name}
-      </div>
-      <div>
-        <b>World:</b> {characterInfo.world}
-      </div>
-      <div>
-        <b>Last login:</b> {characterInfo.lastLogin}
-      </div>
-      <div>
-        <b>Level:</b> {characterInfo.level}
-      </div>
-      <div>
-        <b>Vocation:</b> {characterInfo.vocation}
-      </div>
+    <div className="flex justify-center">
+      <MainCharacter
+        name={characterInfo.name}
+        lastSee={characterInfo.lastLogin}
+        level={characterInfo.level}
+        vocation={characterInfo.vocation}
+        worldName={characterInfo.world}
+      />
     </div>
   );
 }
